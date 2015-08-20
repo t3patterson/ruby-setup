@@ -21,7 +21,7 @@
    ```  
   + NOTE: you may have to install install   [Xcode 6.4 and Xcode Command Line Tools](https://developer.apple.com/downloads/index.action)
   + You also might have to link up the brew!  
-      ```
+     ```
      brew link autoconf pkg-config
      ```
 
