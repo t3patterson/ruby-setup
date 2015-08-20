@@ -27,21 +27,21 @@
 
 4. In your command line, install rbenv and ruby-build (so that you can use  `rbenv install`)
 
-```
-brew install rbenv ruby-build
-``` 
+   ```
+   brew install rbenv ruby-build
+   ``` 
 
 5. Install ruby version 2.3.3
 
-```
-rbenv install 2.2.3
-```
+   ```
+   rbenv install 2.2.3
+   ```
 
 6. Switch over to version 2.3.3 globally
 
-```
-rbenv global 2.2.3
-```
+   ```
+   rbenv global 2.2.3
+   ```
 
 ####Possible Errors
 - *You must ''brew link autoconf pkg-config' before ruby-build can be installed*
