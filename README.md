@@ -2,30 +2,44 @@
 
 ### Install ruby version 2.2.3
 1. Install homebrew 
-```
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-```
+   ```
+   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+   
+   ```
 
 2. Install rbenv
+
+   ```
+   brew install rbenv
+   ```
+
+3. install ruby-build for `rbenv install` command
+
+   ```
+   brew install ruby-build
+   ```  
+  + NOTE: you may have to install install   [Xcode 6.4 and Xcode Command Line Tools](https://developer.apple.com/downloads/index.action)
+
+4. Link up!
+
+   ```
+   brew link autoconf pkg-config
+   ```
+
+
+(5) In your command line, install rbenv and ruby-build (so that you can use  `rbenv install`)
+
 ```
-brew install rbenv
+brew install rbenv ruby-build
 ```
 
-3.  install ruby-build for `rbenv install` command
-```brew install ruby-build```
+(5) In your command line, install rbenv and ruby-build (so that you can use  `rbenv install`)
 
-3a. install Xcode 6.4 and Xcode Command Line Tools
-https://developer.apple.com/downloads/index.action
-
-4. link
-
-brew link auto
-
-X. install ruby version 2.203
 ```
-brew install rbenv
+brew install rbenv ruby-build
 ```
+
 
 
 
@@ -33,7 +47,8 @@ brew install rbenv
 - **You must ''brew link autoconf pkg-config' before ruby-build can be installed**
   - *Solution:* install
 - **Some directories in /usr/local/share/locale aren't writable.
-This can happen if you "sudo make install" software that isn't managed
+
+  This can happen if you "sudo make install" software that isn't managed
 by Homebrew. If a brew tries to add locale information to one of these
 directories, then the install will fail during the link step.
 You should probably `chown` them:**
