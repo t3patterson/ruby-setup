@@ -20,21 +20,24 @@
    brew install ruby-build
    ```  
   + NOTE: you may have to install install   [Xcode 6.4 and Xcode Command Line Tools](https://developer.apple.com/downloads/index.action)
-
-4. Link up!
+  + You also might have to link up the brew!  
+      ```
+     brew link autoconf pkg-config
+     ```
+4. Link up the brew!
 
    ```
    brew link autoconf pkg-config
    ```
 
 
-(5) In your command line, install rbenv and ruby-build (so that you can use  `rbenv install`)
+5. In your command line, install rbenv and ruby-build (so that you can use  `rbenv install`)
 
 ```
 brew install rbenv ruby-build
 ```
 
-(5) In your command line, install rbenv and ruby-build (so that you can use  `rbenv install`)
+6. In your command line, install rbenv and ruby-build (so that you can use  `rbenv install`)
 
 ```
 brew install rbenv ruby-build
