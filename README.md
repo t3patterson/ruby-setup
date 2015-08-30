@@ -119,5 +119,5 @@ We have to set up a Controller and a View
 - `tmp/` - 
 
 ###Further study
-- Routers, Controllers, Views, & Dynamic Content
-- Models, Views, 
+- [Routers, Controllers, Views & Dynamic Templates](./router-controller-view.md)
+- [Databases 101](./databases101.md)
