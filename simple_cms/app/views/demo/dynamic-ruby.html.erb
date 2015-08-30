@@ -1,0 +1,19 @@
+<h1>Some very <em>dynamic</em> ruby</h1>
+
+<% result = 1+44%>
+
+<p>Wowwww the result of math above this is: <strong><%=result%></strong></p>
+
+<h3>My favorite places</h3>
+<ul>
+
+<% 
+ string_injection = ['Bogota','Taipei','Osaka','Beijing'].map do |city| 
+  "#{city}"	
+%>
+	<li>
+	<%="#{city}"%>
+	</li>
+<%end%>
+
+</ul>
