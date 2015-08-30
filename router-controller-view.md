@@ -98,4 +98,57 @@ Thus in a redirect, **2 requests are made**. And, through the rails router-contr
   ```
 
   ###Instance Variables
-  - 
+  - code between View and Controller to communicate in exists in actionpack
+  - Thus can put instance variables from the Controller into our View templates
+    1. url GET = `http://localhost:3000/demo/instance_var_ex`
+    2.  **demo_controller.rb**
+    ```
+    def instance_var_ex
+     @instance_var_1 = [
+      "this is really",
+      "interesting",
+      "dont you htink?",
+      "i am not in this `instance_var.html.erb`",
+      "however, I am readable from the controller!"
+      "i.e. - the action instance_var_in_template "
+     ]
+
+      render('instance_var_templ')
+    end
+    ```
+    3.  **instance_var_templ.html.rb**  
+    ``` 
+    <h4>What does the the instance var have to say </h4>
+    
+    <%@instance_var_1.each do |str|%>
+     <p> <%=str%> </p>  
+    <%end%>
+    ```
+Note: the view cannot talk back to the controller...this stuff only goes one way
+
+###Links 
+- `<a href="./hello.html"> Link to hello-page </a>` is equal to `<%= link_to('Link to hello-page`, {:action => 'hello'}`
+- link_to lets us simply referebce the 'action' without having to worry about the filepath string in the `<a href="....."`
+
+###URL Parameters
+- a url paramter is the *controller*, *action*, *id*, and what's to the right of the '?'
+- From`/demo/hello/3?first=travis&page`, Rails wil create a  **URL-hash with parameters:**  
+  ```ruby
+  {
+  :controller => 'demo',
+  :action => 'hello',
+  :id => 3,
+  :first => 'travis',
+  :page => 6
+  }
+  ```
+- In the **Controller** code (in `demo_controller.rb`), we would access these with the params-hash like so:
+  ```ruby
+  def hello 
+    @id_num = params[:id];
+    @page_num = params[:page]
+
+    render('demo/index')
+  end
+  ```
+- And we would reference them as instance variables `<%= @page_num %>` in the View templates

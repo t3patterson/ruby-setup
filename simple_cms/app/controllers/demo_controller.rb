@@ -26,6 +26,14 @@ class DemoController < ApplicationController
   	  # will render `.../demo/lost-in-time.html.erb  
   end
 
+  def lost_in_time
+    #however, we can change which template to render
+  	@id_num = params['id']
+    @page_num = params[:page]
+  	render('demo/lost-in-time')
+  	  # will render `.../demo/lost-in-time.html.erb  
+  end
+
 
 
   def dynamic_ruby
@@ -38,7 +46,7 @@ class DemoController < ApplicationController
       "interesting",
       "dont you htink?",
       "i am not in this `instance_var.html.erb`",
-      "however, I am readable from the controller!"
+      "however, I am readable from the controller!",
       "i.e. - the action instance_var_in_template "
     ]
 
