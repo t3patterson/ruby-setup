@@ -18,15 +18,33 @@ class DemoController < ApplicationController
   	#     that matches the route
   end
 
+
+
   def hello
     #however, we can change which template to render
   	render('demo/lost-in-time')
   	  # will render `.../demo/lost-in-time.html.erb  
   end
 
+
+
   def dynamic_ruby
     render('dynamic-ruby')
   end
+
+  def instance_var_ex
+    @instance_var_1 = [
+      "this is really",
+      "interesting",
+      "dont you htink?",
+      "i am not in this `instance_var.html.erb`",
+      "however, I am readable from the controller!"
+      "i.e. - the action instance_var_in_template "
+    ]
+
+    render('instance_var_templ')
+  end
+
 
   def other_hello
   	redirect_to(:controller => 'demo', :action => 'durrr-durr')

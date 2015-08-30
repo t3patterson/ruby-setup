@@ -82,20 +82,42 @@ We have to set up a Controller and a View
 
 1. Setup the controller & view  
 
-  in the console, type `rails generate controller «controller-name» «controller-view» «more_views»`  
+  In the console, type `rails generate controller «controller-name» «controller-view» «more_views»`  
 
-  this creates the initial rails directories and filenames for the  controller and view. Sets up: 
+  This creates the initial rails directories and filenames for the  controller and view. Sets up: 
     1. **Controller**: `./controllers/«controller-name»_controller.rb`
-      - 
-      - `./app/controllers/demo_controler.rb`  
+      -  A simple ruby class with a ruby method called `def index`. This is whatrenders the view for us.
+      - `./app/controllers/demo_controler.rb` and also creates a `demo` directory in the View folder 
     
     2. **View**: `./app/views/«controller-name»/«controller-view».html.erb`
-      -  where the ruby-html resides
+      -  This is where the ruby-html resides
       - `./app/views/demo/index.html.rb`  
     
     3. the connection between *Controller* and *Views* is handled through the router `./config/routes.rb` (method with a ruby-block that invokes `get 'demo/index'`)
 
-2. Setup the Rails File Structure
- 
-  
+### The Rails File Structure
 
+- `app/`  - most important directory
+  - `assets/`: 
+    - `images/` , `javascript/` , `stylesheet` 
+  - `models/`
+  - `views/`
+  - `helpers/` : code to help us with our views
+  - `mailers/` : for sending emails
+- `bin/` : `bundle`, `rails` ,rake`
+- `config/` configuration code separate from the application code
+  - `database.yml` : configuration to connect to db
+  - `application.rb` : code specific to application as a whole
+  - `environments/`
+    - code specific to `development.rb`, `production.rb`, and `test.rb`
+  - `initializers/`
+  - `locales/` : for internationalization
+- `db/` code for managing database...comes in handy for migrations
+- `lib/`  : useful code carried from project to project
+- `public/` - files are public. alteranate location for images and js
+- `test/` - place for writing and storing test code
+- `tmp/` - 
+
+###Further study
+- Routers, Controllers, Views, & Dynamic Content
+- Models, Views, 
