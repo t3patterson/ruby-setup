@@ -83,8 +83,88 @@ assuming it's installed....
 - `rake db:schema:dump` tells rails to connect to the db and export the schema . Look for output in `./db/schema.rb`
 
 ###Rake
-Rake is a command line program that is written in Ruby. Runs scripts known as 'tasks'
+Rake is a command line program that is written in Ruby. Runs scripts known as 'tasks'. Rake is used for *database migrations*.
 - Uses `Rakefile` in the root directory
 - In the command line: `rake -T` will show the tasks (also `rake -T db` will show the db tasks)
 - for working with the database, typical syntax looks like `rake db:«task»`
+
+###Migrations
+- Migrations are a set of db instructions written in Ruby and changes the db from one state to another. 
+- When we add new tables to the db, add new columms, we are able to  for **move up** to a new state or **move down** to a previous state of the db.
+- We use migrations to maintain db schema with application code. Our application depends on having the database in a certain state.
+- Instructions are executable and repeatable
+- Allows sharing changes to the db when the schema change
+- Helps w versioning
+- Allows writing Ruby instead of SQL for adding columns/tables. Migrations have access to rails application code
+
+####Generating Migrations
+1. In command line `rails generate migration «SomeTitle»` will create a migration file. Migration file provided in camel-case.
+  - creates file in `./db/migrate/«timestamp»_«some_title».rb`
+  - migration file contains method called `change` that describes the changes to make to the current database and how to undo those changes
+2. You can also create migrations by generating a **Model**. Example: type `rails generate model User`
+  - creates file in `./db/migrate/«timestamp»_«model_name»_«table_name(s)».rb`
+
+####Editing migrations
+Creating columns inside a migration file (e.g.`20150830225413_create_users.rb`)
+
+Syntax: `t.column '«column_name»', '«column_type»' [, '«options»']`
+
+Context:
+```ruby
+ def up :users do |t|
+   
+   #create column for 'first_name'...:string == MySQL's  VARCHAR  
+   t.column "first_name", :string
+
+   #create columns for created_at and updated_at for the records
+   t.timestamps null: false
+ end
+```
+- Table Column Types
+  - `:string`
+  - `:binary`
+  - `:boolean`
+  - `:date`
+  - `:datetime`
+  - `:decimal`
+  - `:float`
+  - `:integer`
+  - `:string`
+  - `:text`
+  - `:time`
+
+- Table Column Options
+  - character limit - `:limit      =>  size` 
+  - `:default    =>  value` 
+  - `:null       =>  true/false`
+  - `:precistion =>  number`
+  - `:scale      =>  number`
+
+Alt syntax: `t.«column_type» «column_name» [, '«options»']`
+- example: `t.string "last_name", :limit => 50, :default => ""`
+
+NOTE: Rails will automatically add primary-key-id.
+
+When we run the migration, our database schema will update with any new columns/fields that we have added.
+
+####Running Migrations
+With `rake db:migrate` rails will run all the generated migrations that have not yet been run
+
+After running migrations the `./db/schema.rb` file will contain the schema of the database (i.e. the tables and columns)
+
+To go to a version, we type `db:migrate VERSION=«version_num»`
+
+To check the current migration-state of the db, `rake db:migrate:status` will return like this in the command line:
+
+```
+database: simple_cms_development
+
+ Status   Migration ID    Migration Name
+--------------------------------------------------
+   up     20150830213511  Do nothing yet
+   up     20150830225413  Create users
+```
+
+**up** is a previous state of the db that is currently active and **down** is a later version that is not currently active. 
+
 
