@@ -167,4 +167,31 @@ database: simple_cms_development
 
 **up** is a previous state of the db that is currently active and **down** is a later version that is not currently active. 
 
+####Migration Methods
+- Inside the `.rb` migration files, there are methods for various database actions that modify the db schema
 
+#####Table Migration Methods
+- `create_table (table,options) do |t|`...
+- `drop_table(table)`
+- `rename_table(table, new_name)`
+
+#####Column Migration Methods
+- `add_column(table, column, data_type, options)`
+- `remove_column(table, column)`
+- `rename_column(table, column, new_name)`
+- `change_column(table, column, data_type, options)` - changes the column in-place non-destructively
+
+#####Index Migration Methods
+Indexes allow you to perform lookups on dbs more quickly. Use indexes on columns(fields) with a *foreign key* and on *fields that are *referenced frequently* (like username for example).
+- `add_index(table, column, options)`
+  - options:  
+    `:unique => true/false`
+    `:name => "your_custom_name`
+- `remove_index(table, column)`
+
+NOTE: on the `down` method in a migration file, it needs to execute the same migration methods in the `up` method but in reverse order with the reverse method (i.e. add_index ....` ---> `remove_index....`)
+
+#####Migration Errors
+- comment out executed code lines to get back on track
+- keep migrations small and concise
+- Test all migrations thoroughly in development
