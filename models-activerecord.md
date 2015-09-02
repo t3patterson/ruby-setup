@@ -69,21 +69,48 @@ users = users.include(:articles_authored)
 - In the `class «SomeName»` ActiveRecord creates *attribute-methods* that let you read/write for each column.
 
 ###Creating Records
-- New/save record
-  1. instantiate object
-  2. Set Values
-  3. Save
-- Create record
-  1. instantiate object, set values, save (one step!)
+Let's say we have a table called `Subject`
 
-###Updating Records
+We can create db records in **two ways.** 
+- Instantiate => Set Values => Save
+  ```ruby
+  subject = Subject.new()
+  subject.first_name = "Travis"
+  subject.last_name = "Hubbard"
+  subject.age = 31
+
+  subject.save
+
+  ##  ALSO: mass assignment ##
+  subject = Subject.new(
+    :first_name => "Travis",
+    :last_name => "Hubbard",
+    :age => 31
+  )
+
+  subject.save
+  ```
+
+- Create (instantiate, set values, and save with `.create`)
+  ```
+  subject = Subject.create(
+    :first_name => "Travis",
+    :last_name => "Hubbard",
+    :age => 31  
+  )
+
+  #....and we're done
+  ```
 
 ###Finding Records
-- **Primary Key Finder** - `Subject.find(«id_#»)`
-  + **Dynamic Finder**  
-     + `Subject.find_by_id(« id_# »)`
-     + `Subject.find_by_name(« id_# »)`
-     + `Subject.all`
+- **Primary Key Finder** 
+  - Example: `Subject.find(«id_#»)`
+  - *Returns a single object or an error*
+- **Dynamic Finder**  
+     +  Example: `Subject.find_by_id(«id_#»)` | `Subject.find_by_first_name(«first_name»)` | `Subject.find_by_age(«age»)`
+     + *Returns a single object or nil*
+- **Find All method**
+  - `subject = Subject.all`
+  - *Returns an array of objects*
 
-  
 
