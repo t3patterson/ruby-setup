@@ -92,7 +92,7 @@ We can create db records in **two ways.**
   ```
 
 - Create (instantiate, set values, and save with `.create`)
-  ```
+  ```ruby
   subject = Subject.create(
     :first_name => "Travis",
     :last_name => "Hubbard",
@@ -107,10 +107,72 @@ We can create db records in **two ways.**
   - Example: `Subject.find(«id_#»)`
   - *Returns a single object or an error*
 - **Dynamic Finder**  
-     +  Example: `Subject.find_by_id(«id_#»)` | `Subject.find_by_first_name(«first_name»)` | `Subject.find_by_age(«age»)`
-     + *Returns a single object or nil*
+     +  Example:  
+       `Subject.find_by_id(«id_#»)`  
+       `Subject.find_by_first_name(«first_name»)` 
+       `Subject.find_by_age(«age»)`
+     +  *Returns a single object or nil* 
 - **Find All method**
-  - `subject = Subject.all`
-  - *Returns an array of objects*
+  - `subjects = Subject.all`
+  - Returns the entire table of subjects as an array
+- `Subject.last` - pulls the last record
 
+###Updating Records
+1. One-at-a-time  
+  ```ruby
+  subject = Subject.find_by_name("Travis")
+  subject.name = "Billy"
+  subject.save
+    # returns `true` if save was successful and `false` if not
+    # subject.updated_at gets updated also
+  ```
+2.  Multiple -- updates multiple attributes and saves the record
+```ruby
+subject.update_attributes(
+  name: "Bobby",
+  age: 33,
+  ugly: false
+)  
+```
+###Query Conditions & Methods  
 
+#####Query Conditions - `.where`
+- Structure = `Subject.where( «conditions» )`  
+
+- Returns an ActiveRecord object which can be chained
+  - `Subject.where(:visible => true).order("position ASC")`
+  - `Subject.where(:visible => true).to_sql` *returns a string of the SQL req*
+
+- Does not execute a database call immediately
+  - Expression Types
+  - String:
+    - Flexible, raw SQL...but use carefully and beware of SQL injection
+    - Ex: `"name= '#{first_name}' AND visible = true"`
+  - Array
+    - Flexible, escaped SQL, safe from SQL Injection
+    - any time we want to drop a value in, we provide a `?` as a placeholder for where that value should go
+    - Ex: `["name = ? AND visible = true", "First Subject" ]`
+    - supports OR, LIKE, less than/greater than
+  - Hash
+    - `{:name => "First Subject", :visible => true}`
+    - Each key-value pair will be joined with an AND
+    - But.... doesn't support OR, LIKE, less than/greater than
+    - Only supports equality, range, and subset checking 
+
+#####Example
+```ruby
+#with chained arrays
+subjects = Subject.where(["visible = ?", true]).where(["position = ?", 1 ])
+
+#with single hash
+subjects = Subject.where(:visible => true, :position => 1)
+```
+
+##### Query Methods - `.order` , `.limit` , `.offset`
+- `where(«search_condition»).order(«SQL_format»)`
+  - **Order SQL Format: ** `table_name.column_name ASC/DESC` 
+    - ASC = ascending , DESC = descending  
+    
+    + Necessary to *disambiguate* the columns on joined tables (because there may be a identically-named columns in more than one table)
+    - Partial Example:  `«...».order("subjects.visible DESC, subjects.name ASC")` 
+    - Full Example:
