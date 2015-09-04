@@ -140,7 +140,7 @@ subject.update_attributes(
 - Structure = `Subject.where( «conditions» )`  
 
 - Returns an ActiveRecord object which can be chained
-  - `Subject.where(:visible => true).order("position ASC")`
+  - `Subject.where(:visible => true).order("position ASC").limit(100).offset(12)`
   - `Subject.where(:visible => true).to_sql` *returns a string of the SQL req*
 
 - Does not execute a database call immediately
@@ -169,10 +169,32 @@ subjects = Subject.where(:visible => true, :position => 1)
 ```
 
 ##### Query Methods - `.order` , `.limit` , `.offset`
-- `where(«search_condition»).order(«SQL_format»)`
+- `.where(«search_condition»).order(«SQL_format»)`
   - **Order SQL Format: ** `table_name.column_name ASC/DESC` 
     - ASC = ascending , DESC = descending  
     
     + Necessary to *disambiguate* the columns on joined tables (because there may be a identically-named columns in more than one table)
-    - Partial Example:  `«...».order("subjects.visible DESC, subjects.name ASC")` 
-    - Full Example:
+    - Example:  `«...».order("subjects.visible DESC, subjects.name ASC")` 
+- `.limit` : limits number of records returned
+- `.offset`: determines number of records skipped
+- Complete Example: - `Subject.where(:visible => true).order("subjects.position ASC").limit(100).offset(12)`
+
+###Named Scopes for Custom Queries
+- custom queries that are defined in a model 
+- Defined using ActiveRelation query methods.
+- Can be called like built-in ActiveRelation methods (e.g. `Subject.find(x)`)
+- Can accept parameters
+- Rails 4 requires lambda syntax
+  - `scope :get_active, lambda { where(:active=>true) }`
+  - same as...  
+    ```ruby
+      def self.active
+        where(:get_active => true)
+      end
+    ```
+- We would then be able call it like this: 
+  `Subject.get_active`  
+  (in the same way that we call an ActiveRelation method)
+  
+
+ 
