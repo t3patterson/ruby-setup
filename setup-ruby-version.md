@@ -43,6 +43,12 @@
    rbenv global 2.2.3
    ```
 
+7.  Make sure that the `.rbenv` path is configured 
+```
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+```
+
 ####Possible Errors
 - *You must 'brew link autoconf pkg-config' before ruby-build can be installed*
   - **Solution:** run `brew link autoconf pkg-config` to link up  

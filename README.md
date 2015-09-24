@@ -13,12 +13,13 @@
     - run `brew doctor` and `brew update` to make sure that all is okay
   - see *[setup instructions](./setup-ruby-version.md)* to setup homebrew, rbenv, and correct ruby version  
 
-3. Install **ruby gems** (if you don't have it)
+3. Install **ruby gems** (if you don't have it) and assign permissions to user 
+  - **Assign Permissions** : `sudo chown -R «username»:«group» ~/.gem`
   - `gem -v` will checkout the version
   - `gem list` will check out which gems are installed
-  - `sudo gem update --system` makes sure we have the latest version 
+  - `gem update --system` makes sure we have the latest version 
   - checkout more at [rubygems.org](https://rubygems.org/)
-  - ex: `sgem install will_paginate`  
+  - ex: `gem install will_paginate`  
 
 4. Install **Ruby on Rails**
   - install *bundler* `gem install bundler` --- manages a gem's dependency gems
