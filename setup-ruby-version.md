@@ -11,51 +11,33 @@
 2. Install rbenv
 
    ```
-   brew install rbenv
-   ```
-
-3. install ruby-build for `rbenv install` command
-
-   ```
-   brew install ruby-build
-   ```  
-  + NOTE: you may have to install install   [Xcode 6.4 and Xcode Command Line Tools](https://developer.apple.com/downloads/index.action)
-  + You also might have to link up the brew!  
-     ```
-     brew link autoconf pkg-config
-     ```
-
-4. In your command line, install rbenv and ruby-build (so that you can use  `rbenv install`)
-
-   ```
    brew install rbenv ruby-build
-   ``` 
+   ```  
 
-5. Install ruby version 2.3.3
+3. Install ruby version 2.2.3
 
    ```
    rbenv install 2.2.3
    ```
 
-6. Switch over to version 2.3.3 globally
+4. Switch over to version 2.2.3 globally
 
    ```
    rbenv global 2.2.3
    ```
 
-7.  Make sure that the `.rbenv` path is configured 
+5.  Make sure that the `.rbenv` path is configured in `~/.bash_profile` at the end of the file
 ```
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 ```
 
-####Possible Errors
-- *You must 'brew link autoconf pkg-config' before ruby-build can be installed*
-  - **Solution:** run `brew link autoconf pkg-config` to link up  
-  
-- *Some directories in /usr/local/share/locale aren't writable. This can happen if you "sudo make install" software that isn't managed by Homebrew. If a brew tries to add locale information to one of these directories, then the install will fail during the link step. You should probably `chown` them:*
-  - You need to make sure that all the files and folders in /usr/local are writable by you.
-  - **Solution:** in your command line type in: `sudo chown -R $USER /usr/local/share/locale`  
-  
-- *No such file or directory - /Library/Developer/CommandLineTools/usr/bin/clang*
-  - **Solution:** Install Xcode 6.4 and  Command Line Tools (OS X 10.10) for Xcode 6.4
+6.  Rerun the bash profile so that it is current
+```
+$  source ~/.bash_profile
+```
+
+7. Test for the ruby version with `ruby -v` 
+```
+> ruby 2.2.3p173
+```
